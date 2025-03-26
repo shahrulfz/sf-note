@@ -10,7 +10,7 @@ export default function CustomEditor() {
 
   return (
     <div className="p-8">
-      <p className="text-lg font-bold">The Noter by Shahrul</p>
+      <p className="text-lg font-bold">SF Note by Shahrul</p>
       <div className="flex justify-center">
         <div
           className="relative mt-10 border border-gray-300 rounded p-4 w-2/5 bg-white shadow-md focus-within:ring-2 focus-within:ring-blue-500"
