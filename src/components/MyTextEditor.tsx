@@ -1,4 +1,4 @@
-import { useRef, ChangeEvent } from "react";
+import { useRef, useEffect, ChangeEvent } from "react";
 
 interface TextEditorProps {
   value: string;
@@ -22,6 +22,10 @@ export default function MyTextEditor({
 }: TextEditorProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
+  useEffect(() => {
+    autoResize();
+  }, [value]); // Run autoResize when the note changes
+
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     onChange(e.target.value);
     autoResize();
@@ -29,8 +33,8 @@ export default function MyTextEditor({
 
   const autoResize = () => {
     if (textareaRef.current) {
-      textareaRef.current.style.height = "auto";
-      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+      textareaRef.current.style.height = "auto"; // Reset height
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; // Adjust height
     }
   };
 
