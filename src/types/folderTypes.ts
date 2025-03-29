@@ -6,7 +6,7 @@ export interface Folder {
 export interface FolderState {
   folders: Folder[];
   selectedFolder: string | null;
-  setSelectedFolder: (folderId: string) => void;
-  addFolder: (name: string) => void;
+  setSelectedFolder: (folderId: string | null) => void;
+  addFolder: (folderName: string) => void;
   removeFolder: (folderId: string) => void;
 }

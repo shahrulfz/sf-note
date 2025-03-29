@@ -1,5 +1,5 @@
-import { useRef, useEffect, ChangeEvent, useState } from "react";
-import { Folder } from "@/types/foldertypes";
+import { useRef, useEffect, ChangeEvent } from "react";
+import { Folder } from "@/types/folderTypes";
 import { NoteStyles } from "@/types/notes/noteTypes";
 
 interface TextEditorProps {
@@ -30,6 +30,12 @@ export default function MyTextEditor({
   useEffect(() => {
     autoResize();
   }, [value]);
+
+  useEffect(() => {
+    if (folders.length > 0 && !folderId) {
+      setFolderId(folders[0].id);
+    }
+  }, [folders, folderId, setFolderId]);
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     onChange(e.target.value);
@@ -129,7 +135,6 @@ export default function MyTextEditor({
           <button
             className="px-4 py-2 border-gray-400 bg-transparent hover:bg-gray-200 transition rounded"
             onClick={handleSave}
-            disabled={!folderId}
           >
             Save Note
           </button>

@@ -6,7 +6,6 @@ export default function NotesSection() {
   const { notesList, deleteNote } = useNoteListStore();
   const { selectedFolder, folders } = useFolderStore();
 
-  // Find the selected folder's name
   const folderName = selectedFolder
     ? folders.find((folder) => folder.id === selectedFolder)?.name ||
       "Unknown Folder"
@@ -26,7 +25,6 @@ export default function NotesSection() {
             key={note.id}
             className="break-inside-avoid p-6 rounded-2xl shadow-lg bg-white backdrop-blur-lg bg-opacity-90 border border-gray-200 hover:scale-105 transition-transform duration-300"
           >
-            {/* Title & Trash Icon */}
             <div className="flex justify-between items-center mb-2">
               <h2 className="text-xl font-semibold">{note.title}</h2>
               <button
@@ -40,7 +38,6 @@ export default function NotesSection() {
               </button>
             </div>
 
-            {/* Note Content */}
             <div
               className="whitespace-pre-wrap break-words"
               style={{

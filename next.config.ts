@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   webpack: (config) => {
-    config.cache = false; // Disable Webpack caching
+    config.cache = false;
     return config;
   },
 };

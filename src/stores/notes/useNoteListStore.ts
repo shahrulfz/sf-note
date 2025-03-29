@@ -15,10 +15,7 @@ const useNoteListStore = create<NoteState>()(
       notesList: [],
       addNote: (note) =>
         set((state) => ({
-          notesList: [
-            ...state.notesList,
-            { ...note, id: crypto.randomUUID() }, // Generate random ID
-          ],
+          notesList: [...state.notesList, { ...note, id: crypto.randomUUID() }],
         })),
       updateNote: (id, updatedNote) =>
         set((state) => ({
