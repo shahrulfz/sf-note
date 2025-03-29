@@ -7,10 +7,6 @@ interface NoteTakerProps {
   folders: { id: string; name: string }[];
 }
 
-interface ChildProps {
-  onSave: () => void;
-}
-
 export default function NoteTaker({ folders }: NoteTakerProps) {
   const [isClick, setIsClick] = useState(false);
   const {
