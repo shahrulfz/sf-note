@@ -8,7 +8,7 @@ interface Folder {
 interface SidebarFolderProps {
   folders: Folder[];
   selectedFolder: string | null;
-  setSelectedFolder: (folderId: string) => void;
+  setSelectedFolder: (folderId: string | null) => void;
   addFolder: (folderName: string) => void;
   removeFolder: (folderId: string) => void;
 }
@@ -25,7 +25,7 @@ export default function SidebarFolder({
   const handleAddFolder = () => {
     if (newFolderName.trim()) {
       addFolder(newFolderName);
-      setNewFolderName(""); // Clear input field after adding
+      setNewFolderName("");
     }
   };
 
@@ -53,7 +53,20 @@ export default function SidebarFolder({
         </button>
       </div>
 
+      {/* "All Folders" Option */}
       <div className="mt-4 space-y-2">
+        <div
+          className={`flex items-center justify-between py-2 px-4 rounded-lg shadow-sm cursor-pointer transition ${
+            selectedFolder === null
+              ? "bg-blue-500 text-white"
+              : "hover:bg-yellow-200"
+          }`}
+          onClick={() => setSelectedFolder(null)}
+        >
+          <span>All Folders</span>
+        </div>
+
+        {/* Other Folders */}
         {folders.map((folder) => (
           <div
             key={folder.id}
