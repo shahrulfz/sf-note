@@ -31,12 +31,6 @@ export default function MyTextEditor({
     autoResize();
   }, [value]);
 
-  useEffect(() => {
-    if (folders.length > 0 && !folderId) {
-      setFolderId(folders[0].id);
-    }
-  }, [folders, folderId, setFolderId]);
-
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     onChange(e.target.value);
     autoResize();

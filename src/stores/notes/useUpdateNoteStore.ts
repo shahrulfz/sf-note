@@ -10,25 +10,26 @@ const defaultNoteStyles: NoteStyles = {
 };
 
 interface NoteState {
-  title?: string;
-  note?: string;
+  title: string;
+  note: string;
   noteStyles: NoteStyles;
-  folderId?: string;
+  folderId: string;
   selectedNoteId: string;
   setTitle: (title: string) => void;
   setNote: (note: string) => void;
   setNoteStyles: (styles: Partial<NoteStyles>) => void;
   setFolderId: (id: string) => void;
   setSelectedNoteId: (id: string) => void;
+  reset: () => void;
 }
 
 const useUpdateNoteStore = create<NoteState>()(
   persist(
     (set) => ({
-      title: undefined,
-      note: undefined,
+      title: "",
+      note: "",
       noteStyles: defaultNoteStyles,
-      folderId: undefined,
+      folderId: "",
       selectedNoteId: "",
       setTitle: (title) => set({ title }),
       setNote: (note) => set({ note }),
@@ -38,6 +39,18 @@ const useUpdateNoteStore = create<NoteState>()(
         set((state) => ({
           noteStyles: { ...state.noteStyles, ...styles },
         })),
+      reset: () =>
+        set({
+          title: "",
+          note: "",
+          noteStyles: {
+            isBold: false,
+            isItalic: false,
+            fontSize: 16,
+            color: "#000000",
+          },
+          folderId: "",
+        }),
     }),
     {
       name: "update-note-storage",

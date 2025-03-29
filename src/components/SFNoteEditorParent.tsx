@@ -1,36 +1,43 @@
-import { useState } from "react";
 import MyTextEditor from "@/components/MyTextEditor";
-import useNoteStore from "@/stores/notes/useNewNoteStore";
-import useNoteListStore from "@/stores/notes/useNoteListStore";
 
 interface NoteTakerProps {
+  className?: string;
   folders: { id: string; name: string }[];
+  title: string;
+  note: string;
+  noteStyles: any;
+  folderId: string;
+  setTitle: (title: string) => void;
+  setNote: (note: string) => void;
+  setNoteStyles: (styles: Partial<any>) => void;
+  setFolderId: (id: string) => void;
+  isClick: boolean;
+  setIsClick: (click: boolean) => void;
+  handleSave: () => void;
+  reset: () => void;
+  showClearButton?: boolean;
 }
 
-export default function NoteTaker({ folders }: NoteTakerProps) {
-  const [isClick, setIsClick] = useState(false);
-  const {
-    title,
-    note,
-    noteStyles,
-    folderId,
-    setTitle,
-    setNote,
-    setNoteStyles,
-    setFolderId,
-    reset,
-  } = useNoteStore();
-  const { addNote } = useNoteListStore();
-
-  const handleSave = () => {
-    addNote({ title, note, noteStyles, folderId });
-    setIsClick(false);
-    reset();
-  };
-
+export default function NoteTaker({
+  className = "",
+  folders,
+  title,
+  note,
+  noteStyles,
+  folderId,
+  setTitle,
+  setNote,
+  setNoteStyles,
+  setFolderId,
+  isClick,
+  setIsClick,
+  handleSave,
+  reset,
+  showClearButton = true,
+}: NoteTakerProps) {
   return (
     <div
-      className="relative border border-gray-300 rounded p-4 w-1/2 bg-white shadow-md focus-within:ring-2 focus-within:ring-blue-500 mx-auto mt-10"
+      className={`${className} relative border border-gray-300 rounded p-4 bg-white shadow-md focus-within:ring-2 focus-within:ring-blue-500 mx-auto`}
       onClick={() => !isClick && setIsClick(true)}
     >
       {isClick && (
@@ -43,20 +50,21 @@ export default function NoteTaker({ folders }: NoteTakerProps) {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          <button
-            className="absolute top-0 right-0 hover:text-white text-xs px-2 py-1 rounded-full hover:bg-red-600 hover:cursor-pointer"
-            onClick={(e) => {
-              e.stopPropagation();
-              setIsClick(false);
-              reset();
-            }}
-            aria-label="Close title input"
-          >
-            ✕
-          </button>
+          {showClearButton && (
+            <button
+              className="absolute top-0 right-0 hover:text-white text-xs px-2 py-1 rounded-full hover:bg-red-600 hover:cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsClick(false);
+                reset();
+              }}
+              aria-label="Close title input"
+            >
+              ✕
+            </button>
+          )}
         </div>
       )}
-
       <MyTextEditor
         value={note}
         isClick={isClick}
