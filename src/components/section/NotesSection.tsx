@@ -1,10 +1,16 @@
 import TrashIcon from "../../icons/TrashIcon";
 import useNoteListStore from "@/stores/notes/useNoteListStore";
 import useFolderStore from "@/stores/folders/useFolderStore";
+import useUpdateNoteStore from "@/stores/notes/useUpdateNoteStore";
 
-export default function NotesSection() {
+interface NotesSectionProps {
+  openSelectedModal: () => void;
+}
+
+export default function NotesSection({ openSelectedModal }: NotesSectionProps) {
   const { notesList, deleteNote } = useNoteListStore();
   const { selectedFolder, folders } = useFolderStore();
+  const { setSelectedNoteId } = useUpdateNoteStore();
 
   const folderName = selectedFolder
     ? folders.find((folder) => folder.id === selectedFolder)?.name ||
@@ -23,6 +29,10 @@ export default function NotesSection() {
         {filteredNotes.map((note) => (
           <div
             key={note.id}
+            onClick={() => {
+              setSelectedNoteId(note.id);
+              openSelectedModal();
+            }}
             className="break-inside-avoid p-6 rounded-2xl shadow-lg bg-white backdrop-blur-lg bg-opacity-90 border border-gray-200 hover:scale-105 transition-transform duration-300"
           >
             <div className="flex justify-between items-center mb-2">

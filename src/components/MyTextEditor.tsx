@@ -131,7 +131,6 @@ export default function MyTextEditor({
             </optgroup>
           </select>
 
-          {/* Save Button */}
           <button
             className="px-4 py-2 border-gray-400 bg-transparent hover:bg-gray-200 transition rounded"
             onClick={handleSave}
