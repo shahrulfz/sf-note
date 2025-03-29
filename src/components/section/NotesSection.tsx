@@ -38,7 +38,10 @@ export default function NotesSection({ openSelectedModal }: NotesSectionProps) {
             <div className="flex justify-between items-center mb-2">
               <h2 className="text-xl font-semibold">{note.title}</h2>
               <button
-                onClick={() => deleteNote(note.id)}
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevents card click event
+                  deleteNote(note.id);
+                }}
                 className="relative group text-gray-500 hover:text-red-500 transition-colors cursor-pointer"
               >
                 <TrashIcon size={18} />
