@@ -45,7 +45,6 @@ export default function MyTextEditor({
 
   return (
     <div className="w-full">
-      {/* Toolbar */}
       {isClick && (
         <div className="mb-2 flex space-x-2 pb-2">
           <button
@@ -110,7 +109,6 @@ export default function MyTextEditor({
 
       {isClick && (
         <div className="flex justify-end gap-2">
-          {/* Folder Selection */}
           <select
             className="p-2 border border-gray-300 bg-white rounded"
             value={folderId}

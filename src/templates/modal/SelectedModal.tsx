@@ -3,7 +3,6 @@ import useUpdateNoteStore from "@/stores/notes/useUpdateNoteStore";
 import NoteTaker from "@/components/SFNoteEditorParent";
 import useFolderStore from "@/stores/folders/useFolderStore";
 import useNoteListStore from "@/stores/notes/useNoteListStore";
-import { Note } from "@/types/notes/noteTypes";
 
 type ModalProps = {
   isOpen: boolean;
@@ -40,8 +39,6 @@ const SelectedModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
   };
 
   useEffect(() => {
-    console.log("usefec");
-    console.log({ hasUnsavedChanges, previousNoteId, selectedNoteId });
     if (selectedNoteId != previousNoteId) {
       setPreviousNoteId(selectedNoteId);
       const foundNote = notesList.find((note) => note.id === selectedNoteId);

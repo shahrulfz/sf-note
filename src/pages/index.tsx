@@ -2,7 +2,7 @@ import SidebarFolder from "@/components/sidebar/SidebarFolder";
 import useFolderStore from "@/stores/folders/useFolderStore";
 import NoteTaker from "@/components/SFNoteEditorParent";
 import NotesSection from "@/components/section/NotesSection";
-import SelectedModal from "@/components/modal/SelectedModal";
+import SelectedModal from "@/templates/modal/SelectedModal";
 import useSelectedModalStore from "@/stores/modal/useSelectedModalStore";
 import useNoteStore from "@/stores/notes/useNewNoteStore";
 import useNoteListStore from "@/stores/notes/useNoteListStore";
