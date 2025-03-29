@@ -1,7 +1,6 @@
 import SidebarFolder from "@/components/sidebar/SidebarFolder";
 import useFolderStore from "@/stores/folders/useFolderStore";
 import NoteTaker from "@/components/SFNoteEditorParent";
-import useNoteListStore from "@/stores/notes/useNoteListStore";
 import NotesSection from "@/components/section/NotesSection";
 
 export default function index() {
@@ -12,8 +11,6 @@ export default function index() {
     addFolder,
     removeFolder,
   } = useFolderStore();
-
-  const { notesList } = useNoteListStore();
 
   return (
     <div>
@@ -29,7 +26,7 @@ export default function index() {
 
         <div className="col-span-10">
           <NoteTaker folders={folders} />
-          <NotesSection notesList={notesList} />
+          <NotesSection />
         </div>
       </div>
     </div>

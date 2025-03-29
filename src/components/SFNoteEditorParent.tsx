@@ -24,6 +24,8 @@ export default function NoteTaker({ folders }: NoteTakerProps) {
 
   const handleSave = () => {
     addNote({ title, note, noteStyles, folderId });
+    setIsClick(false);
+    reset();
   };
 
   return (

@@ -43,10 +43,6 @@ export default function MyTextEditor({
     }
   };
 
-  // const handleSave = () => {
-  //   console.log("Note saved to:", folderId, "Content:", value);
-  // };
-
   return (
     <div className="w-full">
       {/* Toolbar */}

@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { FolderState } from "@/types/foldertypes";
+import { FolderState } from "@/types/folderTypes";
 
 const useFolderStore = create<FolderState>()(
   persist(
