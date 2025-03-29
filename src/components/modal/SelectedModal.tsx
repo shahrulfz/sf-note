@@ -24,6 +24,9 @@ const SelectedModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
     setNoteStyles,
     setFolderId,
     reset,
+    hasUnsavedChanges,
+    previousNoteId,
+    setPreviousNoteId,
   } = useUpdateNoteStore();
 
   const { folders } = useFolderStore();
@@ -32,13 +35,15 @@ const SelectedModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
 
   const handleSave = () => {
     updateNote(selectedNoteId, { title, note, noteStyles, folderId });
-
     onClose();
     reset();
   };
 
   useEffect(() => {
-    if (selectedNoteId) {
+    console.log("usefec");
+    console.log({ hasUnsavedChanges, previousNoteId, selectedNoteId });
+    if (selectedNoteId != previousNoteId) {
+      setPreviousNoteId(selectedNoteId);
       const foundNote = notesList.find((note) => note.id === selectedNoteId);
 
       if (foundNote) {

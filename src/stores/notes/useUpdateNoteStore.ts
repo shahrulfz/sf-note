@@ -14,11 +14,14 @@ interface NoteState {
   note: string;
   noteStyles: NoteStyles;
   folderId: string;
+  previousNoteId: string;
   selectedNoteId: string;
+  hasUnsavedChanges: boolean;
   setTitle: (title: string) => void;
   setNote: (note: string) => void;
   setNoteStyles: (styles: Partial<NoteStyles>) => void;
   setFolderId: (id: string) => void;
+  setPreviousNoteId: (id: string) => void;
   setSelectedNoteId: (id: string) => void;
   reset: () => void;
 }
@@ -30,26 +33,32 @@ const useUpdateNoteStore = create<NoteState>()(
       note: "",
       noteStyles: defaultNoteStyles,
       folderId: "",
+      previousNoteId: "",
       selectedNoteId: "",
-      setTitle: (title) => set({ title }),
-      setNote: (note) => set({ note }),
-      setFolderId: (folderId) => set({ folderId }),
+      hasUnsavedChanges: false,
+
+      setTitle: (title) => set({ title, hasUnsavedChanges: true }),
+      setNote: (note) => set({ note, hasUnsavedChanges: true }),
+      setFolderId: (folderId) => set({ folderId, hasUnsavedChanges: true }),
+
+      setPreviousNoteId: (previousNoteId) => set({ previousNoteId }),
       setSelectedNoteId: (selectedNoteId) => set({ selectedNoteId }),
+
       setNoteStyles: (styles) =>
         set((state) => ({
           noteStyles: { ...state.noteStyles, ...styles },
+          hasUnsavedChanges: true,
         })),
+
       reset: () =>
         set({
           title: "",
           note: "",
-          noteStyles: {
-            isBold: false,
-            isItalic: false,
-            fontSize: 16,
-            color: "#000000",
-          },
+          noteStyles: defaultNoteStyles,
           folderId: "",
+          previousNoteId: "",
+          selectedNoteId: "",
+          hasUnsavedChanges: false,
         }),
     }),
     {
