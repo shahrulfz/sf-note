@@ -1,18 +1,17 @@
 import { useRef, useEffect, ChangeEvent, useState } from "react";
 import { Folder } from "@/types/foldertypes";
+import { NoteStyles } from "@/types/notes/noteTypes";
 
 interface TextEditorProps {
   value: string;
   isClick: boolean;
   onChange: (value: string) => void;
-  noteStyles: {
-    isBold: boolean;
-    isItalic: boolean;
-    fontSize: number;
-    color: string;
-  };
+  noteStyles: NoteStyles;
   setNoteStyles: (styles: Partial<TextEditorProps["noteStyles"]>) => void;
   folders: Folder[];
+  folderId: string;
+  setFolderId: (value: string) => void;
+  handleSave: () => void;
 }
 
 export default function MyTextEditor({
@@ -22,9 +21,11 @@ export default function MyTextEditor({
   noteStyles,
   setNoteStyles,
   folders,
+  folderId,
+  setFolderId,
+  handleSave,
 }: TextEditorProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const [selectedFolder, setSelectedFolder] = useState<string>("");
 
   useEffect(() => {
     autoResize();
@@ -42,9 +43,9 @@ export default function MyTextEditor({
     }
   };
 
-  const handleSave = () => {
-    console.log("Note saved to:", selectedFolder, "Content:", value);
-  };
+  // const handleSave = () => {
+  //   console.log("Note saved to:", folderId, "Content:", value);
+  // };
 
   return (
     <div className="w-full">
@@ -116,20 +117,23 @@ export default function MyTextEditor({
           {/* Folder Selection */}
           <select
             className="p-2 border border-gray-300 bg-white rounded"
-            value={selectedFolder}
-            onChange={(e) => setSelectedFolder(e.target.value)}
+            value={folderId}
+            onChange={(e) => setFolderId(e.target.value)}
           >
-            <option value="">Select Folder</option>
-            <option value="Work">Work</option>
-            <option value="Personal">Personal</option>
-            <option value="Ideas">Ideas</option>
+            <optgroup label="Select Folder">
+              {folders.map((folder) => (
+                <option key={folder.id} value={folder.id}>
+                  {folder.name}
+                </option>
+              ))}
+            </optgroup>
           </select>
 
           {/* Save Button */}
           <button
             className="px-4 py-2 border-gray-400 bg-transparent hover:bg-gray-200 transition rounded"
             onClick={handleSave}
-            disabled={!selectedFolder}
+            disabled={!folderId}
           >
             Save Note
           </button>

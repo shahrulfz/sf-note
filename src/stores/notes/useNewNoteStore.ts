@@ -1,20 +1,16 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-
-interface NoteStyles {
-  isBold: boolean;
-  isItalic: boolean;
-  fontSize: number;
-  color: string;
-}
+import { NoteStyles } from "@/types/notes/noteTypes";
 
 interface NoteState {
   title: string;
   note: string;
   noteStyles: NoteStyles;
+  folderId: string;
   setTitle: (title: string) => void;
   setNote: (note: string) => void;
   setNoteStyles: (styles: Partial<NoteStyles>) => void;
+  setFolderId: (id: string) => void;
   reset: () => void;
 }
 
@@ -29,10 +25,12 @@ const useNoteStore = create<NoteState>()(
         fontSize: 16,
         color: "#000000",
       },
+      folderId: "",
       setTitle: (title) => set({ title }),
       setNote: (note) => set({ note }),
       setNoteStyles: (styles) =>
         set((state) => ({ noteStyles: { ...state.noteStyles, ...styles } })),
+      setFolderId: (folderId) => set({ folderId }),
       reset: () =>
         set({
           title: "",
@@ -43,10 +41,11 @@ const useNoteStore = create<NoteState>()(
             fontSize: 16,
             color: "#000000",
           },
+          folderId: "",
         }),
     }),
     {
-      name: "note-storage", // storage key name
+      name: "single-note-storage",
     }
   )
 );
