@@ -1,18 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-
-interface Folder {
-  id: string;
-  name: string;
-}
-
-interface FolderState {
-  folders: Folder[];
-  selectedFolder: string | null;
-  setSelectedFolder: (folderId: string) => void;
-  addFolder: (name: string) => void;
-  removeFolder: (folderId: string) => void;
-}
+import { FolderState } from "@/types/foldertypes";
 
 const useFolderStore = create<FolderState>()(
   persist(
@@ -31,11 +19,12 @@ const useFolderStore = create<FolderState>()(
       removeFolder: (folderId) =>
         set((state) => ({
           folders: state.folders.filter((folder) => folder.id !== folderId),
-          selectedFolder: state.selectedFolder === folderId ? null : state.selectedFolder,
+          selectedFolder:
+            state.selectedFolder === folderId ? null : state.selectedFolder,
         })),
     }),
     {
-      name: "folder-storage", 
+      name: "folder-storage",
     }
   )
 );

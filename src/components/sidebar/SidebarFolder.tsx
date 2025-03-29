@@ -43,9 +43,10 @@ export default function SidebarFolder({
           className="w-full outline-none bg-transparent"
         />
         <button
-          className="relative text-blue-500 hover:text-blue-700 cursor-pointer group"
+          className="relative text-blue-500 hover:text-blue-700 cursor-pointer group text-2xl"
           onClick={handleAddFolder}
         >
+          +
           <span className="absolute -top-8 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-700 text-white text-xs rounded-md px-2 py-1 whitespace-nowrap">
             Add folder
           </span>
@@ -59,7 +60,7 @@ export default function SidebarFolder({
             className={`flex items-center justify-between py-2 px-4 rounded-lg shadow-sm cursor-pointer transition ${
               selectedFolder === folder.id
                 ? "bg-blue-500 text-white"
-                : "hover:bg-gray-200"
+                : "hover:bg-yellow-200"
             }`}
             onClick={() => setSelectedFolder(folder.id)}
           >

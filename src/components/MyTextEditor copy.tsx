@@ -1,5 +1,4 @@
 import { useRef, useEffect, ChangeEvent, useState } from "react";
-import { Folder } from "@/types/foldertypes";
 
 interface TextEditorProps {
   value: string;
@@ -12,7 +11,6 @@ interface TextEditorProps {
     color: string;
   };
   setNoteStyles: (styles: Partial<TextEditorProps["noteStyles"]>) => void;
-  folders: Folder[];
 }
 
 export default function MyTextEditor({
@@ -21,14 +19,13 @@ export default function MyTextEditor({
   onChange,
   noteStyles,
   setNoteStyles,
-  folders,
 }: TextEditorProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [selectedFolder, setSelectedFolder] = useState<string>("");
 
   useEffect(() => {
     autoResize();
-  }, [value]);
+  }, [value]); // Run autoResize when the note changes
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     onChange(e.target.value);
@@ -84,6 +81,18 @@ export default function MyTextEditor({
         </div>
       )}
 
+      {/* Folder Selection */}
+      <select
+        className="mb-2 p-2 border border-gray-300 rounded bg-white"
+        value={selectedFolder}
+        onChange={(e) => setSelectedFolder(e.target.value)}
+      >
+        <option value="">Select Folder</option>
+        <option value="Work">Work</option>
+        <option value="Personal">Personal</option>
+        <option value="Ideas">Ideas</option>
+      </select>
+
       <div
         className="w-full py-2 outline-none"
         style={{
@@ -111,30 +120,14 @@ export default function MyTextEditor({
         />
       </div>
 
-      {isClick && (
-        <div className="flex justify-end gap-2">
-          {/* Folder Selection */}
-          <select
-            className="p-2 border border-gray-300 bg-white rounded"
-            value={selectedFolder}
-            onChange={(e) => setSelectedFolder(e.target.value)}
-          >
-            <option value="">Select Folder</option>
-            <option value="Work">Work</option>
-            <option value="Personal">Personal</option>
-            <option value="Ideas">Ideas</option>
-          </select>
-
-          {/* Save Button */}
-          <button
-            className="px-4 py-2 border-gray-400 bg-transparent hover:bg-gray-200 transition rounded"
-            onClick={handleSave}
-            disabled={!selectedFolder}
-          >
-            Save Note
-          </button>
-        </div>
-      )}
+      {/* Save Button */}
+      <button
+        className="mt-2 px-4 py-2 rounded border border-gray-400 bg-transparent hover:bg-gray-200 transition"
+        onClick={handleSave}
+        disabled={!selectedFolder}
+      >
+        Save Note
+      </button>
     </div>
   );
 }

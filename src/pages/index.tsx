@@ -64,6 +64,7 @@ export default function SFEditor() {
               onChange={setNote}
               noteStyles={noteStyles}
               setNoteStyles={setNoteStyles}
+              folders={folders}
             />
           </div>
         </div>
