@@ -1,6 +1,6 @@
 import MyTextEditor from "@/components/MyTextEditor";
 
-interface NoteTakerProps {
+interface SFNoteEditorParentProps {
   className?: string;
   folders: { id: string; name: string }[];
   title: string;
@@ -18,7 +18,7 @@ interface NoteTakerProps {
   showClearButton?: boolean;
 }
 
-export default function NoteTaker({
+export default function SFNoteEditorParent({
   className = "",
   folders,
   title,
@@ -34,7 +34,7 @@ export default function NoteTaker({
   handleSave,
   reset,
   showClearButton = true,
-}: NoteTakerProps) {
+}: SFNoteEditorParentProps) {
   return (
     <div
       className={`${className} relative border border-gray-300 rounded p-4 bg-white shadow-md focus-within:ring-2 focus-within:ring-blue-500 mx-auto`}

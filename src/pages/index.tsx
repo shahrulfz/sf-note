@@ -1,6 +1,6 @@
 import SidebarFolder from "@/components/sidebar/SidebarFolder";
 import useFolderStore from "@/stores/folders/useFolderStore";
-import NoteTaker from "@/components/SFNoteEditorParent";
+import SFNoteEditorParent from "@/components/SFNoteEditorParent";
 import NotesSection from "@/components/section/NotesSection";
 import SelectedModal from "@/templates/modal/SelectedModal";
 import useSelectedModalStore from "@/stores/modal/useSelectedModalStore";
@@ -55,7 +55,7 @@ export default function index() {
         />
 
         <div className="col-span-10">
-          <NoteTaker
+          <SFNoteEditorParent
             className="w-1/2"
             folders={folders}
             title={title}

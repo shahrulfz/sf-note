@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useUpdateNoteStore from "@/stores/notes/useUpdateNoteStore";
-import NoteTaker from "@/components/SFNoteEditorParent";
+import SFNoteEditorParent from "@/components/SFNoteEditorParent";
 import useFolderStore from "@/stores/folders/useFolderStore";
 import useNoteListStore from "@/stores/notes/useNoteListStore";
 
@@ -77,7 +77,7 @@ const SelectedModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
             </span>
           </button>
         </div>
-        <NoteTaker
+        <SFNoteEditorParent
           folders={folders}
           title={title}
           note={note}

@@ -17,7 +17,6 @@ export default function NotesSection({ openSelectedModal }: NotesSectionProps) {
       "Unknown Folder"
     : "All Notes";
 
-  // Filter notes based on selected folder (null means "All Folders")
   const filteredNotes = selectedFolder
     ? notesList.filter((note) => note.folderId === selectedFolder)
     : notesList; // Show all notes if selectedFolder is null
