@@ -111,8 +111,9 @@ export default function MyTextEditor({
         <div className="flex justify-end gap-2">
           <select
             className="p-2 border border-gray-300 bg-white rounded"
-            value={folderId}
+            value={folderId || (folders.length > 0 ? folders[0].id : "")}
             onChange={(e) => setFolderId(e.target.value)}
+            disabled={folders.length === 0}
           >
             <optgroup label="Select Folder">
               {folders.map((folder) => (
@@ -124,8 +125,14 @@ export default function MyTextEditor({
           </select>
 
           <button
-            className="px-4 py-2 border-gray-400 bg-transparent hover:bg-gray-200 transition rounded"
+            className={`px-4 py-2 border-gray-400 bg-transparent rounded transition ${
+              value.trim() === ""
+                ? "cursor-not-allowed opacity-50"
+                : "hover:bg-gray-200"
+            }`}
             onClick={handleSave}
+            disabled={value.trim() === ""}
+            aria-disabled={value.trim() === ""}
           >
             Save Note
           </button>
