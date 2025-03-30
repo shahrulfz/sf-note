@@ -16,7 +16,6 @@ interface NoteState {
   folderId: string;
   previousNoteId: string;
   selectedNoteId: string;
-  hasUnsavedChanges: boolean;
   setTitle: (title: string) => void;
   setNote: (note: string) => void;
   setNoteStyles: (styles: Partial<NoteStyles>) => void;
@@ -35,11 +34,10 @@ const useUpdateNoteStore = create<NoteState>()(
       folderId: "",
       previousNoteId: "",
       selectedNoteId: "",
-      hasUnsavedChanges: false,
 
-      setTitle: (title) => set({ title, hasUnsavedChanges: true }),
-      setNote: (note) => set({ note, hasUnsavedChanges: true }),
-      setFolderId: (folderId) => set({ folderId, hasUnsavedChanges: true }),
+      setTitle: (title) => set({ title }),
+      setNote: (note) => set({ note }),
+      setFolderId: (folderId) => set({ folderId }),
 
       setPreviousNoteId: (previousNoteId) => set({ previousNoteId }),
       setSelectedNoteId: (selectedNoteId) => set({ selectedNoteId }),
@@ -47,7 +45,6 @@ const useUpdateNoteStore = create<NoteState>()(
       setNoteStyles: (styles) =>
         set((state) => ({
           noteStyles: { ...state.noteStyles, ...styles },
-          hasUnsavedChanges: true,
         })),
 
       reset: () =>
@@ -58,7 +55,6 @@ const useUpdateNoteStore = create<NoteState>()(
           folderId: "",
           previousNoteId: "",
           selectedNoteId: "",
-          hasUnsavedChanges: false,
         }),
     }),
     {

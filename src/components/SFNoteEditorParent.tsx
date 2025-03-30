@@ -1,15 +1,16 @@
 import MyTextEditor from "@/components/MyTextEditor";
+import { NoteStyles } from "@/types/notes/noteTypes";
 
 interface SFNoteEditorParentProps {
   className?: string;
   folders: { id: string; name: string }[];
   title: string;
   note: string;
-  noteStyles: any;
+  noteStyles: NoteStyles;
   folderId: string;
   setTitle: (title: string) => void;
   setNote: (note: string) => void;
-  setNoteStyles: (styles: Partial<any>) => void;
+  setNoteStyles: (styles: Partial<NoteStyles>) => void;
   setFolderId: (id: string) => void;
   isClick: boolean;
   setIsClick: (click: boolean) => void;

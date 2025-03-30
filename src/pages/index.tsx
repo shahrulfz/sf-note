@@ -8,7 +8,7 @@ import useNoteStore from "@/stores/notes/useNewNoteStore";
 import useNoteListStore from "@/stores/notes/useNoteListStore";
 import { useState } from "react";
 
-export default function index() {
+export default function IndexPage() {
   const {
     folders,
     selectedFolder,

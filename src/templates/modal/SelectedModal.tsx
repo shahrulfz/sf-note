@@ -10,8 +10,6 @@ type ModalProps = {
 };
 
 const SelectedModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
-  if (!isOpen) return null;
-
   const {
     selectedNoteId,
     title,
@@ -23,7 +21,6 @@ const SelectedModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
     setNoteStyles,
     setFolderId,
     reset,
-    hasUnsavedChanges,
     previousNoteId,
     setPreviousNoteId,
   } = useUpdateNoteStore();
@@ -32,14 +29,8 @@ const SelectedModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
   const { notesList, updateNote } = useNoteListStore();
   const [isClick, setIsClick] = useState(true);
 
-  const handleSave = () => {
-    updateNote(selectedNoteId, { title, note, noteStyles, folderId });
-    onClose();
-    reset();
-  };
-
   useEffect(() => {
-    if (selectedNoteId != previousNoteId) {
+    if (selectedNoteId !== previousNoteId) {
       setPreviousNoteId(selectedNoteId);
       const foundNote = notesList.find((note) => note.id === selectedNoteId);
 
@@ -54,13 +45,23 @@ const SelectedModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
     }
   }, [
     selectedNoteId,
+    previousNoteId,
     notesList,
     setTitle,
     setNote,
     setNoteStyles,
     setFolderId,
     reset,
+    setPreviousNoteId,
   ]);
+
+  const handleSave = () => {
+    updateNote(selectedNoteId, { title, note, noteStyles, folderId });
+    onClose();
+    reset();
+  };
+
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-300/70">
